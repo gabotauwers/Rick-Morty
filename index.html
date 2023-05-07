@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>Personajes - Rick and Morty</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+  </head>
+  <body>
+    <!-- <div id="overlay" class="hidden"></div>
+
+    <h1 class="title">Personajes de Rick y Morty</h1>
+
+    <section class="personajes"></section>
+    <div class="btn-pages">
+      <a href="#" onclick="antPagina()">Página anterior</a>
+      <a href="#" onclick="sigPagina()">Página siguiente</a>
+    </div>
+     -->
+    <section class="vh-100" style="background-color: #f4f5f7;">
+      <div class="container py-5 h-100" id="character-info"></div>
+    </section>
+    <script>
+      // Hacemos una solicitud GET a la API para obtener información sobre un personaje por su ID
+      fetch('https://rickandmortyapi.com/api/character/265')
+        .then(response => response.json())
+        .then(data => {
+          // Creamos un string con la información del personaje
+          const characterInfo = `<div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-lg-6 mb-4 mb-lg-0">
+            <div class="card mb-3" style="border-radius: .5rem;">
+              <div class="row g-0">
+                <div class="col-md-4 gradient-custom text-center text-white"
+                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                  <img id="character-image" src=""
+                    alt="Avatar" class="img-fluid my-5" />
+                  <h2>${data.name}</h2>
+                  <p>Especie: ${data.species}</p>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body p-4">
+                    <h6>Información</h6>
+                    <hr class="mt-0 mb-4">
+                    <div class="row pt-1">
+                      <div class="col-6 mb-3">
+                        <h6>Estado</h6>
+                        <p class="text-muted">${data.status}</p>
+                      </div>
+                      <div class="col-6 mb-3">
+                        <h6>Género</h6>
+                        <p class="text-muted">${data.gender}</p>
+                      </div>
+                    </div>
+                    <hr class="mt-0 mb-4">
+                    <div class="row pt-1">
+                      <div class="col-6 mb-3">
+                        <h6>Origen</h6>
+                        <p class="text-muted">${data.origin.name}</p>
+                      </div>
+                      <div class="col-6 mb-3">
+                        <h6>Ubicación</h6>
+                        <p class="text-muted">${data.location.name}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+          // Agregamos la información del personaje al div correspondiente en la página
+          document.getElementById('character-info').innerHTML = characterInfo;
+
+          // Agregamos la imagen del personaje a la página
+          const characterImage = document.getElementById('character-image');
+          characterImage.src = data.image;
+          characterImage.style.width = '300px'; // Cambiamos el ancho de la imagen para que se ajuste a la página
+        })
+        .catch(error => {
+          console.error('Error al obtener información del personaje:', error);
+        });
+    </script>
+  </body>
+</html>
